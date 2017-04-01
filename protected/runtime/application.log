@@ -1,0 +1,30 @@
+2017/03/31 01:15:15 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "contacts". in /Users/admin/yii/framework/web/CController.php:483
+Stack trace:
+#0 /Users/admin/yii/framework/web/CController.php(270): CController->missingAction('contacts')
+#1 /Users/admin/yii/framework/web/CWebApplication.php(282): CController->run('contacts')
+#2 /Users/admin/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/contacts')
+#3 /Users/admin/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /Users/admin/Documents/WebRoot/bazarTalk/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/bazarTalk/index.php/site/contacts
+---
+2017/03/31 01:17:19 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "contacts". in /Users/admin/yii/framework/web/CController.php:483
+Stack trace:
+#0 /Users/admin/yii/framework/web/CController.php(270): CController->missingAction('contacts')
+#1 /Users/admin/yii/framework/web/CWebApplication.php(282): CController->run('contacts')
+#2 /Users/admin/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/contacts')
+#3 /Users/admin/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /Users/admin/Documents/WebRoot/bazarTalk/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/bazarTalk/index.php/site/contacts
+---
+2017/03/31 06:23:30 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "contacts". in /Users/admin/yii/framework/web/CController.php:483
+Stack trace:
+#0 /Users/admin/yii/framework/web/CController.php(270): CController->missingAction('contacts')
+#1 /Users/admin/yii/framework/web/CWebApplication.php(282): CController->run('contacts')
+#2 /Users/admin/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/contacts')
+#3 /Users/admin/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /Users/admin/Documents/WebRoot/bazarTalk/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/bazarTalk/index.php/site/contacts
+---
