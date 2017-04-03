@@ -22,8 +22,8 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'user_id',
-		'page_id',
+		'user.username',
+		'page.title',
 		'comment',
 		'date_entered',
 	),

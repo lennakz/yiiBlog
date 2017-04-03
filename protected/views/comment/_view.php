@@ -10,11 +10,11 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
+	<?php echo CHtml::encode($data->user->username); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('page_id')); ?>:</b>
-	<?php echo CHtml::encode($data->page_id); ?>
+	<?php echo CHtml::encode($data->page->title); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('comment')); ?>:</b>

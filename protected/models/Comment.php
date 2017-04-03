@@ -32,8 +32,14 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, page_id, comment, date_entered', 'required'),
-			array('user_id, page_id', 'length', 'max'=>10),
+			// Required attributes (by the user):
+			array('comment', 'required'),
+			// Must be in related tables:
+			array('user_id, page_id', 'exist'),
+			// Strip tags from the comments:
+			array('comment', 'filter', 'filter'=>'strip_tags'),
+			// Set the date_entered to NOW():
+			array('date_entered', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, page_id, comment, date_entered', 'safe', 'on'=>'search'),
@@ -94,6 +100,21 @@ class Comment extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	protected function beforeValidate()
+	{
+    if(empty($this->user_id))
+		{
+			// Set to current user:
+      $this->user_id = Yii::app()->user->id;
+		}
+		if(empty($this->page_id))
+		{
+			// Set to current user:
+      $this->page_id = Yii::app()->page->id;
+		}
+    return parent::beforeValidate();
 	}
 
 	/**

@@ -18,6 +18,7 @@
  */
 class User extends CActiveRecord
 {
+	public $passCompare; // Needed for registration!
 	/**
 	 * @return string the associated database table name
 	 */
@@ -34,11 +35,26 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, email, pass, type, date_entered', 'required'),
+			// Required fields when registering:
+			array('username, email, pass', 'required', 'on'=>'insert'),
+			// Username must be unique and less than 45 characters:
+			array('email, username', 'unique'),
 			array('username', 'length', 'max'=>45),
+			// Email address must also be unique (see above), an email address
+			// and less than 60 characters:
+			array('email', 'email'),
 			array('email', 'length', 'max'=>60),
-			array('pass', 'length', 'max'=>64),
-			array('type', 'length', 'max'=>6),
+			// Password must match a regular expression:
+			array('pass', 'match', 'pattern'=>'/^[a-z0-9_-]{6,20}$/i'),
+			// Password must match the comparison:
+			array('pass', 'compare', 'compareAttribute'=>'passCompare', 'on'=>'register'),
+			// Set the type to "public" by default:
+			array('type', 'default', 'value'=>'public'),
+			// Type must also be one of three values:
+			array('type', 'in', 'range'=>array('public','author','admin')),
+			// Set the date_entered to NOW():
+			array('date_entered', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
+			array('date_updated', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, username, email, pass, type, date_entered', 'safe', 'on'=>'search'),
@@ -71,6 +87,7 @@ class User extends CActiveRecord
 			'pass' => 'Pass',
 			'type' => 'Type',
 			'date_entered' => 'Date Entered',
+			'comparePass' => 'Password Confirmation'
 		);
 	}
 
