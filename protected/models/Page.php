@@ -48,7 +48,7 @@ class Page extends CActiveRecord
 			// Filter the content to allow for NULL values:
 			array('content', 'default', 'value'=>NULL),
 			// Set the date_entered to NOW() every time:
-			array('date_entered', 'default', 'value'=>new CDbExpression('NOW()')),
+			//array('date_entered', 'default', 'value'=>new CDbExpression('NOW()')),
 			// date_published must be in a format that MySQL likes:
 			array('date_published', 'date', 'format'=>'YYYY-MM-DD'),
 			// The following rule is used by search().

@@ -7,6 +7,7 @@ return array(
 
 	'connectionString' => 'mysql:host=localhost;dbname=yiiBlog',
 	'emulatePrepare' => true,
+	'enableParamLogging' => true,
 	'username' => 'root',
 	'password' => 'root',
 	'charset' => 'utf8',

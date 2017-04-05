@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'tbl_user':
  * @property string $id
  * @property string $username
+ * @property string $name
  * @property string $email
  * @property string $pass
  * @property string $type
@@ -36,10 +37,11 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			// Required fields when registering:
-			array('username, email, pass', 'required', 'on'=>'insert'),
+			array('username, name, email, pass', 'required', 'on'=>'insert'),
 			// Username must be unique and less than 45 characters:
 			array('email, username', 'unique'),
 			array('username', 'length', 'max'=>45),
+			array('name', 'length', 'max'=>40),
 			// Email address must also be unique (see above), an email address
 			// and less than 60 characters:
 			array('email', 'email'),
@@ -47,17 +49,17 @@ class User extends CActiveRecord
 			// Password must match a regular expression:
 			array('pass', 'match', 'pattern'=>'/^[a-z0-9_-]{6,20}$/i'),
 			// Password must match the comparison:
-			array('pass', 'compare', 'compareAttribute'=>'passCompare', 'on'=>'register'),
+			//array('pass', 'compare', 'compareAttribute'=>'passCompare', 'on'=>'register'),
 			// Set the type to "public" by default:
 			array('type', 'default', 'value'=>'public'),
 			// Type must also be one of three values:
 			array('type', 'in', 'range'=>array('public','author','admin')),
 			// Set the date_entered to NOW():
 			array('date_entered', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'insert'),
-			array('date_updated', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'update'),
+			//array('date_updated', 'default', 'value'=>new CDbExpression('NOW()'), 'on'=>'update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, email, pass, type, date_entered', 'safe', 'on'=>'search'),
+			array('id, username, name, email, pass, type, date_entered', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,8 +85,9 @@ class User extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'username' => 'Username',
+			'name' => 'Full Name',
 			'email' => 'Email',
-			'pass' => 'Pass',
+			'pass' => 'Password',
 			'type' => 'Type',
 			'date_entered' => 'Date Entered',
 			'comparePass' => 'Password Confirmation'
@@ -111,6 +114,7 @@ class User extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('username',$this->username,true);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('pass',$this->pass,true);
 		$criteria->compare('type',$this->type,true);
